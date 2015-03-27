@@ -1,0 +1,53 @@
+﻿@model Trunc.Models.UrlItemViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Trunc</h1>
+    <p class="lead">Trunc is a magical URL shortener!</p>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { role = "form", @class = "col-lg-6" })) {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(m => m.OriginUrl)
+            @Html.TextBoxFor(m => m.OriginUrl, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.OriginUrl, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ShortenUrl)
+            @Html.TextBoxFor(m => m.ShortenUrl, new { @class = "form-control", placeHolder = "Keep it empty to generate automatically" })
+            @Html.ValidationMessageFor(m => m.ShortenUrl, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ExpireMode)
+            @Html.EnumDropDownListFor(m => m.ExpireMode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ExpireMode, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ExpireInDays)
+            @Html.TextBoxFor(m => m.ExpireInDays, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ExpireInDays, "", new { @class = "text-danger" })
+        </div>
+        <button type="submit" class="btn btn-default">Create</button>
+    }
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function() {
+            $('#ExpireMode').change(function() {
+                if ($(this).val() === '2') {
+                    $('#ExpireInDays').closest('.form-group').hide();
+                } else {
+                    $('#ExpireInDays').closest('.form-group').show();
+                }
+            });
+        });
+    </script>
+}

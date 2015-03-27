@@ -1,0 +1,13 @@
+﻿@model Trunc.Models.UrlItemViewModel
+
+@{
+    ViewBag.Title = "Success";
+}
+
+<h2>Success</h2>
+<h3>
+    @{
+        var url = string.Format("http://{0}:{1}/{2}", Request.Url.Host, Request.Url.Port, Model.ShortenUrl);
+    }
+    Your Trunc URL is <a href="@url">@url</a>
+</h3>
