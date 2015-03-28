@@ -209,3 +209,6 @@ $RECYCLE.BIN/
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+## Trunc Ignores
+App_Data/Trunc/*
