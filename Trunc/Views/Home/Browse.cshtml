@@ -1,0 +1,59 @@
+﻿@using Trunc.Data
+@model Trunc.Models.BrowseViewModel
+
+@{
+    ViewBag.Title = "Browse";
+}
+
+<h2>Browse</h2>
+
+@using (Html.BeginForm("Browse", "Home", FormMethod.Post, new { role = "form", @class = "form-inline" })) {
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="filter">Filter</label>
+        <input type="text" id="filter" name="filter" class="form-control input-sm" value="@TempData["filter"]" />
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm">GO</button>
+    @Html.ActionLink("Reset", "Browse", "Home", null, new { role = "button", @class = "btn btn-default btn-sm" })
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>ShortenUrl</th>
+        <th>OriginUrl</th>
+        <th>Created On</th>
+        <th>Last Touched</th>
+        <th>Expire Mode</th>
+        <th>Expires On</th>
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model.Items) {
+        <tr>
+            <td>
+                <a href="@UrlUtilities.GetShortUrl(item.ShortenUrl)" target="_blank">@item.ShortenUrl</a>
+            </td>
+            <td>
+                @item.OriginUrl
+            </td>
+            <td>
+                @item.CreatedOn.ToString("G")
+        </td>
+        <td>
+            @item.TouchedOn.ToString("G")
+        </td>
+        <td>
+            @item.ExpireMode.ToString()
+        </td>
+        <td>
+            @item.ExpiryDate
+        </td>
+        @*<td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>*@
+    </tr>
+    }
+
+</table>

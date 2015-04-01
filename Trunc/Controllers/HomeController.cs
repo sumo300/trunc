@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using Trunc.Data;
@@ -19,27 +21,27 @@ namespace Trunc.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(UrlItemViewModel model) {
+        public ActionResult Index(UrlItemModel model) {
             if (string.IsNullOrWhiteSpace(model.ShortenUrl)) {
                 model.ShortenUrl = UrlGenerator.GetRandomUrl(6);
             }
 
-            var item = _repo.GetById(model.ShortenUrl);
+            UrlItem item = _repo.GetById(model.ShortenUrl);
 
             if (item != null) {
-                return View("Exists", model);
+                return View("Exists", Mapper.Map<UrlItemViewModel>(item));
             }
 
             item = Mapper.Map<UrlItem>(model);
 
             _repo.Add(item);
 
-            return View("Success", model);
+            return View("Success", Mapper.Map<UrlItemViewModel>(item));
         }
 
         [Route("{shortenUrl}")]
         public ActionResult Index(string shortenUrl) {
-            var item = _repo.GetById(shortenUrl);
+            UrlItem item = _repo.GetById(shortenUrl);
 
             if (item == null) {
                 return View("NotFound");
@@ -71,7 +73,26 @@ namespace Trunc.Controllers {
         }
 
         public ActionResult Browse() {
-            throw new NotImplementedException();
+            IEnumerable<UrlItem> items = _repo.All();
+            var model = new BrowseViewModel {
+                Items = Mapper.Map<IEnumerable<UrlItemViewModel>>(items).OrderBy(i => i.ExpiryDate)
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Browse(string filter) {
+            var model = new BrowseViewModel();
+            IEnumerable<UrlItem> items = _repo.All().Where(i=>i.OriginUrl.Contains(filter) || i.ShortenUrl.Contains(filter));
+            
+            if (items.Any()) {
+                model.Items = Mapper.Map<IEnumerable<UrlItemViewModel>>(items).OrderBy(i => i.ExpiryDate);
+            }
+
+            TempData["filter"] = filter;
+
+            return View(model);
         }
     }
 }

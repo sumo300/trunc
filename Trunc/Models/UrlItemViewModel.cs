@@ -1,21 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
 using Trunc.Data;
 
 namespace Trunc.Models {
-    public class UrlItemViewModel {
-        [Display(Name = "Shorten URL")]
-        public string ShortenUrl { get; set; }
+    public class UrlItemViewModel : UrlItemModel {
+        public DateTime CreatedOn { get; set; }
 
-        [Required]
-        [Url]
-        [Display(Name = "Origin URL")]
-        public string OriginUrl { get; set; }
+        public DateTime TouchedOn { get; set; }
 
-        [Range(1, int.MaxValue)]
-        [Display(Name = "Expire in Days")]
-        public int ExpireInDays { get; set; }
+        public string FullShortUrl {
+            get {
+                return UrlUtilities.GetShortUrl(ShortenUrl);
+            }
+        }
 
-        [Display(Name = "Expire Mode")]
-        public ExpireMode ExpireMode { get; set; }
+        public string ExpiryDate {
+            get {
+                switch (ExpireMode) {
+                    case ExpireMode.ByCreated:
+                        return CreatedOn.AddDays(ExpireInDays).ToString("G");
+                    case ExpireMode.ByLastAccessed:
+                        return TouchedOn.AddDays(ExpireInDays).ToString("G");
+                    default:
+                        return "N/A";
+                }
+            }
+        }
     }
 }

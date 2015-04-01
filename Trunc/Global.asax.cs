@@ -14,7 +14,8 @@ namespace Trunc {
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Mapper.CreateMap<UrlItemViewModel, UrlItem>();
+            Mapper.CreateMap<UrlItemModel, UrlItem>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            Mapper.CreateMap<UrlItem, UrlItemViewModel>().IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
     }
 }
