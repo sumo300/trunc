@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 		PublishScripts\Configurations\Trunc-WAWS-dev.json = PublishScripts\Configurations\Trunc-WAWS-dev.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trunc.Resources", "Trunc.Resources\Trunc.Resources.csproj", "{8F310963-BED8-4F12-89C3-1B322A4D9979}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{A8366F9C-DB09-41E6-8E50-E0EFC4833486}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8366F9C-DB09-41E6-8E50-E0EFC4833486}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8366F9C-DB09-41E6-8E50-E0EFC4833486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F310963-BED8-4F12-89C3-1B322A4D9979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F310963-BED8-4F12-89C3-1B322A4D9979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F310963-BED8-4F12-89C3-1B322A4D9979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F310963-BED8-4F12-89C3-1B322A4D9979}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
