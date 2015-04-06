@@ -6,8 +6,5 @@
 
 <h2>Already Exists</h2>
 <h3>
-    @{
-        var url = string.Format("http://{0}:{1}/{2}", Request.Url.Host, Request.Url.Port, Model.ShortenUrl);
-    }
-    Your @Resources.Site.ApplicationName URL is <a href="@url">@url</a>
+    Your @Resources.Site.ApplicationName URL is <a href="@Model.FullShortUrl">@Model.FullShortUrl</a>
 </h3>

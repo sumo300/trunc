@@ -120,4 +120,7 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>Trunc</value>
   </data>
+  <data name="Tagline" xml:space="preserve">
+    <value>{0} is a magical URL shortener!</value>
+  </data>
 </root>

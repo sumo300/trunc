@@ -68,5 +68,14 @@ namespace Resources {
                 return ResourceManager.GetString("ApplicationName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is a magical URL shortener!.
+        /// </summary>
+        internal static string Tagline {
+            get {
+                return ResourceManager.GetString("Tagline", resourceCulture);
+            }
+        }
     }
 }
