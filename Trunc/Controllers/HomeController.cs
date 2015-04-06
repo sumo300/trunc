@@ -7,7 +7,6 @@ using Trunc.Data;
 using Trunc.Models;
 
 namespace Trunc.Controllers {
-    [HandleError]
     public class HomeController : Controller {
         private readonly IRepository<UrlItem> _repo;
 
