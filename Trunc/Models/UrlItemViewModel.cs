@@ -11,7 +11,21 @@ namespace Trunc.Models {
             get
             {
                 return ShortenUrl.ToAbsoluteUrl();
-                //return UrlUtilities.GetShortUrl(ShortenUrl);
+            }
+        }
+
+        public string OriginUrlForDisplay
+        {
+            get
+            {
+                var url = OriginUrl;
+
+                if (url.Length > 30)
+                {
+                    return url.Substring(0, 30) + "...";
+                }
+
+                return url;
             }
         }
 
