@@ -5,7 +5,7 @@
     ViewBag.Title = "Browse";
 }
 
-<h2>Browse</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Browse", "Home", FormMethod.Post, new { role = "form", @class = "form-inline" })) {
     @Html.AntiForgeryToken()
@@ -31,7 +31,7 @@
     @foreach (var item in Model.Items) {
         <tr>
             <td>
-                <a href="@UrlUtilities.GetShortUrl(item.ShortenUrl)" target="_blank">@item.ShortenUrl</a>
+                <a href="@item.FullShortUrl" target="_blank">@item.ShortenUrl</a>
             </td>
             <td>
                 @item.OriginUrl

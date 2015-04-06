@@ -8,8 +8,10 @@ namespace Trunc.Models {
         public DateTime TouchedOn { get; set; }
 
         public string FullShortUrl {
-            get {
-                return UrlUtilities.GetShortUrl(ShortenUrl);
+            get
+            {
+                return ShortenUrl.ToAbsoluteUrl();
+                //return UrlUtilities.GetShortUrl(ShortenUrl);
             }
         }
 
