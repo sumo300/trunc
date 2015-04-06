@@ -155,6 +155,7 @@
     <Compile Include="App_Start\TypeMappingConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Data\UrlUtilities.cs" />
     <Compile Include="Models\BrowseViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\IRepository.cs" />
