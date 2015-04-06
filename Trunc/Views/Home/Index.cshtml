@@ -66,12 +66,14 @@
             $('form:first *:input[type!=hidden]:first').focus();
 
             $('#ExpireMode').change(function() {
-                if ($(this).val() === '2') {
+                if ($(this).val() === '0') {
                     $('#ExpireInDays').closest('.form-group').hide();
                 } else {
                     $('#ExpireInDays').closest('.form-group').show();
                 }
             });
+
+            $('#ExpireMode').change();
         });
     </script>
 }

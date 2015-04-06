@@ -24,13 +24,13 @@ namespace Trunc.Data {
     }
 
     public enum ExpireMode {
+        [Display(Name = "Never")]
+        Never = 0,
+
         [Display(Name = "By Created")]
-        ByCreated = 0,
+        ByCreated = 1,
 
         [Display(Name = "By Last Accessed")]
-        ByLastAccessed = 1,
-
-        [Display(Name = "Never")]
-        Never = 2
+        ByLastAccessed = 2,
     }
 }
