@@ -15,12 +15,21 @@ namespace Trunc.Controllers {
         }
 
         public ActionResult Index() {
-            return View();
+            // Defaults
+            var model = new UrlItemModel {
+                ExpireInDays = 1,
+                ExpireMode = ExpireMode.Never
+            };
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(UrlItemModel model) {
+            if (!ModelState.IsValid) {
+                return View(model);
+            }
+
             if (string.IsNullOrWhiteSpace(model.ShortenUrl)) {
                 model.ShortenUrl = UrlGenerator.GetRandomUrl(6);
             }
@@ -57,7 +66,7 @@ namespace Trunc.Controllers {
             return Redirect(item.OriginUrl);
         }
 
-        private static bool IsExpired(UrlItem item) {
+        private bool IsExpired(UrlItem item) {
             DateTime expiry = DateTime.Now.AddDays(1);
 
             switch (item.ExpireMode) {
@@ -82,6 +91,10 @@ namespace Trunc.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Browse(string filter) {
+            if (!ModelState.IsValid) {
+                return View();
+            }
+
             var model = new BrowseViewModel();
             IEnumerable<UrlItem> items = _repo.All().Where(i=>i.OriginUrl.Contains(filter) || i.ShortenUrl.Contains(filter));
             
