@@ -14,6 +14,8 @@ namespace Trunc.Data
 
         bool Exists(string id);
 
+        bool Exists(T item);
+
         IEnumerable<T> All();
     }
 }

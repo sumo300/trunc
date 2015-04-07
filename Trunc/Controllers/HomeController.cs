@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
@@ -42,7 +43,12 @@ namespace Trunc.Controllers {
 
             item = Mapper.Map<UrlItem>(model);
 
-            _repo.Add(item);
+            try {
+                _repo.Add(item);
+            } catch (Exception e) {
+                Debug.WriteLine(e);
+                return View("Exists", Mapper.Map<UrlItemViewModel>(item));
+            }
 
             return View("Success", Mapper.Map<UrlItemViewModel>(item));
         }
