@@ -42,7 +42,10 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.ExpireInDays, new { @class = "col-sm-2 control-label" })
                 <div class="col-sm-1">
-                    @Html.TextBoxFor(m => m.ExpireInDays, new { @class = "form-control" })
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-ban-circle"></span></span>
+                        @Html.TextBoxFor(m => m.ExpireInDays, new { @class = "form-control" })
+                    </div>
                 </div>
                 <div class="col-sm-9">
                     @Html.ValidationMessageFor(m => m.ExpireInDays, "", new { @class = "text-danger" })
