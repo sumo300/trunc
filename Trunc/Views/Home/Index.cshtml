@@ -35,8 +35,11 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.ExpireMode, new { @class = "col-sm-2 control-label" })
-                <div class="col-sm-2">
-                    @Html.EnumDropDownListFor(m => m.ExpireMode, new { @class = "form-control" })
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-ban-circle"></span></span>
+                        @Html.EnumDropDownListFor(m => m.ExpireMode, new { @class = "form-control" })
+                    </div>
                 </div>
             </div>
             <div class="form-group">

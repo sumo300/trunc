@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
@@ -15,12 +16,21 @@ namespace Trunc.Controllers {
         }
 
         public ActionResult Index() {
-            return View();
+            // Defaults
+            var model = new UrlItemModel {
+                ExpireInDays = 1,
+                ExpireMode = ExpireMode.Never
+            };
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(UrlItemModel model) {
+            if (!ModelState.IsValid) {
+                return View(model);
+            }
+
             if (string.IsNullOrWhiteSpace(model.ShortenUrl)) {
                 model.ShortenUrl = UrlGenerator.GetRandomUrl(6);
             }
@@ -33,7 +43,12 @@ namespace Trunc.Controllers {
 
             item = Mapper.Map<UrlItem>(model);
 
-            _repo.Add(item);
+            try {
+                _repo.Add(item);
+            } catch (Exception e) {
+                Debug.WriteLine(e);
+                return View("Exists", Mapper.Map<UrlItemViewModel>(item));
+            }
 
             return View("Success", Mapper.Map<UrlItemViewModel>(item));
         }
@@ -57,7 +72,7 @@ namespace Trunc.Controllers {
             return Redirect(item.OriginUrl);
         }
 
-        private static bool IsExpired(UrlItem item) {
+        private bool IsExpired(UrlItem item) {
             DateTime expiry = DateTime.Now.AddDays(1);
 
             switch (item.ExpireMode) {
@@ -82,6 +97,10 @@ namespace Trunc.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Browse(string filter) {
+            if (!ModelState.IsValid) {
+                return View();
+            }
+
             var model = new BrowseViewModel();
             IEnumerable<UrlItem> items = _repo.All().Where(i=>i.OriginUrl.Contains(filter) || i.ShortenUrl.Contains(filter));
             
