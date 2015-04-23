@@ -9,6 +9,10 @@ Trunc is a URL shortening application written using C# and MVC 5.  Data is store
 * Partial localization (App name and tagline for now)
 * Browse and Search - Can't remember a shortened URL or lost it?  Browse or Search for it!
 
+## Setup ##
+
+Out of the box, there is ZERO configuration.  For local debugging purposes, ensure you have IIS Express installed and hit F5 in Visual Studio 2013.  For runtime deployment, use the Visual Studio Publish feature and WebDeploy it to an IIS server or, if you have an Azure account, deploy directly to Azure!  VS 2013's publish features can work directly with Azure, provisioning at the time of publish.  Re-publish with ease.
+
 ## OSS Shout-Outs ##
 * [AutoMapper](https://github.com/AutoMapper/AutoMapper)
 * [Biggy](https://github.com/xivsolutions/biggy)
