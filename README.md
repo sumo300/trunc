@@ -1,6 +1,6 @@
 # Trunc #
 
-Trunc is a URL shortening application written using C# and MVC 5.  Data is stored in a SQLite database using the [Biggy](https://github.com/xivsolutions/biggy) library.  It is intended to be as lightweight as possible without the requirements for a big database or lot's of infrastructure.  What this app is **not** is a robust, enterprise-level application for public URL shortening.  It has concurrency limits, but is great for larger businesses that have internal link shortening needs with relatively low utilization.
+Trunc is a URL shortening application written using C# and MVC 5, targeting .NET 4.5.1.  Data is stored in a SQLite database using the [Biggy](https://github.com/xivsolutions/biggy) library.  It is intended to be as lightweight as possible without the requirements for a big database or lot's of infrastructure.  What this app is **not** is a robust, enterprise-level application for public URL shortening.  It has concurrency limits, but is great for larger businesses that have internal link shortening needs with relatively low utilization.
 
 ## Features ##
 
@@ -12,6 +12,17 @@ Trunc is a URL shortening application written using C# and MVC 5.  Data is store
 ## Setup ##
 
 Out of the box, there is ZERO configuration.  For local debugging purposes, ensure you have IIS Express installed and hit F5 in Visual Studio 2013.  For runtime deployment, use the Visual Studio Publish feature and WebDeploy it to an IIS server or, if you have an Azure account, deploy directly to Azure!  VS 2013's publish features can work directly with Azure, provisioning at the time of publish.  Re-publish with ease.
+
+Trunc uses a SQLite database located in the `~/App_Data/` folder.  Ensure the application pool user has read/write access to this folder.  If a database does not exist yet (UrlItem.db), one will be created.
+
+By default, ELMAH logs locally to the `~/App_Data/ELMAH` folder as XML files.  Browsing the ELMAH page is as simple as navigating to 'http[s]://[YourURL]/elmah'.  It is highly recommended to read [ELMAH's documentation](https://code.google.com/p/elmah/) if you'd like to change the logging location or to secure this page.
+
+## Roadmap ##
+
+* Full localization
+* Hit counts
+* Database migrations (if there is any need to change the data model)
+* Upgrade to .NET Core 5 to support cross-platform deployments
 
 ## OSS Shout-Outs ##
 * [AutoMapper](https://github.com/AutoMapper/AutoMapper)
