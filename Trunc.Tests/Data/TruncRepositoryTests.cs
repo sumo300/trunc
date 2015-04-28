@@ -1,18 +1,18 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Trunc.Data;
 
 namespace Trunc.Tests.Data {
-    [TestClass]
+    [TestFixture]
     public class TruncRepositoryTests {
         private TruncRepository _repo;
 
-        [TestInitialize]
+        [TestFixtureSetUp]
         public void Init() {
             _repo = new TruncRepository(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
         }
 
-        [TestMethod]
+        [Test]
         public void Add() {
             var item = new UrlItem {
                 ExpireMode = ExpireMode.Never,
@@ -26,7 +26,7 @@ namespace Trunc.Tests.Data {
             Assert.IsNotNull(storedItem);
         }
 
-        [TestMethod]
+        [Test]
         public void Delete() {
             var item = new UrlItem {
                 ExpireMode = ExpireMode.Never,

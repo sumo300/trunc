@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Trunc.Controllers;
 using Trunc.Data;
 
 namespace Trunc.Tests.Controllers {
-    [TestClass]
+    [TestFixture]
     public class HomeControllerTest {
-        [TestMethod]
+        [Test]
         public void Index() {
             // Arrange
             var controller = new HomeController(new TruncRepository(AppDomain.CurrentDomain.SetupInformation.ApplicationBase));
