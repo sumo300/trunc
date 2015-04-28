@@ -16,13 +16,12 @@ namespace Trunc.Tests.Data {
         public void Add() {
             var item = new UrlItem {
                 ExpireMode = ExpireMode.Never,
-                OriginUrl = "http://www.google.com/",
-                ShortenUrl = UrlGenerator.GetRandomUrl(6)
+                OriginUrl = "http://www.google.com/"
             };
 
             _repo.Add(item);
 
-            UrlItem storedItem = _repo.GetById(item.ShortenUrl);
+            UrlItem storedItem = _repo.GetById(UrlGenerator.Decode(item.CustomUrl));
 
             Assert.IsNotNull(storedItem);
         }
@@ -32,13 +31,13 @@ namespace Trunc.Tests.Data {
             var item = new UrlItem {
                 ExpireMode = ExpireMode.Never,
                 OriginUrl = "http://www.google.com/",
-                ShortenUrl = "flarg"
+                CustomUrl = "flarg"
             };
 
             _repo.Add(item);
             _repo.Delete(item);
 
-            Assert.IsFalse(_repo.Exists(item.ShortenUrl));
+            Assert.IsFalse(_repo.Exists(UrlGenerator.Decode(item.CustomUrl)));
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web.Mvc;
 using AutoMapper;
 using Trunc.Data;
@@ -31,14 +32,14 @@ namespace Trunc.Controllers {
                 return View(model);
             }
 
-            if (string.IsNullOrWhiteSpace(model.ShortenUrl)) {
-                model.ShortenUrl = UrlGenerator.GetRandomUrl(6);
-            }
+            UrlItem item;
 
-            UrlItem item = _repo.GetById(model.ShortenUrl);
+            if (!string.IsNullOrWhiteSpace(model.CustomUrl)) {
+                item = _repo.All().FirstOrDefault(i => i.CustomUrl == model.CustomUrl);
 
-            if (item != null) {
-                return View("Exists", Mapper.Map<UrlItemViewModel>(item));
+                if (item != null) {
+                    return View("Exists", Mapper.Map<UrlItemViewModel>(item));
+                }
             }
 
             item = Mapper.Map<UrlItem>(model);
@@ -55,7 +56,7 @@ namespace Trunc.Controllers {
 
         [Route("{shortenUrl}")]
         public ActionResult Index(string shortenUrl) {
-            UrlItem item = _repo.GetById(shortenUrl);
+            UrlItem item = _repo.GetById(UrlGenerator.Decode(shortenUrl));
 
             if (item == null) {
                 return View("NotFound");
@@ -102,8 +103,10 @@ namespace Trunc.Controllers {
             }
 
             var model = new BrowseViewModel();
-            IEnumerable<UrlItem> items = _repo.All().Where(i=>i.OriginUrl.Contains(filter) || i.ShortenUrl.Contains(filter));
-            
+
+            IEnumerable<UrlItem> items = _repo.All().Where(item => item.OriginUrl.Contains(filter) ||
+                                                                   item.CustomUrl.Contains(filter));
+                                    
             if (items.Any()) {
                 model.Items = Mapper.Map<IEnumerable<UrlItemViewModel>>(items).OrderBy(i => i.ExpiryDate);
             }

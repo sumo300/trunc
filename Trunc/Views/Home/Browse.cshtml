@@ -18,7 +18,7 @@
 
 <table class="table table-striped">
     <tr>
-        <th>ShortenUrl</th>
+        <th>CustomUrl</th>
         <th>OriginUrl</th>
         <th>Created On</th>
         <th>Last Touched</th>
@@ -30,7 +30,7 @@
     @foreach (var item in Model.Items) {
         <tr>
             <td>
-                <a href="@item.FullShortUrl" target="_blank">@item.ShortenUrl</a>
+                <a href="@item.FullShortUrl" target="_blank">@item.ShortUrl</a>
             </td>
             <td>
                 <abbr title="@item.OriginUrl">@item.OriginUrlForDisplay</abbr>

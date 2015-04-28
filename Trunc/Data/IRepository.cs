@@ -4,7 +4,7 @@ namespace Trunc.Data
 {
     public interface IRepository<T>
     {
-        T GetById(string id);
+        T GetById(int id);
 
         void Add(T item);
 
@@ -12,7 +12,7 @@ namespace Trunc.Data
 
         void Update(T item);
 
-        bool Exists(string id);
+        bool Exists(int id);
 
         bool Exists(T item);
 

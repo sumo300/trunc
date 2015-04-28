@@ -11,28 +11,28 @@ namespace Trunc.Data {
 
         #region IRepository<UrlItem> Members
 
-        public UrlItem GetById(string id) {
-            return _store.Items.FirstOrDefault(t => t.ShortenUrl == id);
+        public UrlItem GetById(int id) {
+            return _store.Items.FirstOrDefault(t => t.Id == id);
         }
 
         public void Add(UrlItem item) {
-            if (!Exists(item.ShortenUrl)) {
+            if (!Exists(item.Id)) {
                 _store.Items.Add(item);
             }
         }
 
         public bool Delete(UrlItem item) {
-            return Exists(item.ShortenUrl) && _store.Items.Remove(item);
+            return Exists(item.Id) && _store.Items.Remove(item);
         }
 
         public void Update(UrlItem item) {
-            if (Exists(item.ShortenUrl)) {
+            if (Exists(item.Id)) {
                 _store.Items.Update(item);
             }
         }
 
-        public bool Exists(string id) {
-            return _store.Items.Any(u => u.ShortenUrl == id);
+        public bool Exists(int id) {
+            return _store.Items.Any(u => u.Id == id);
         }
 
         public bool Exists(UrlItem item) {

@@ -3,14 +3,19 @@ using Trunc.Data;
 
 namespace Trunc.Models {
     public class UrlItemViewModel : UrlItemModel {
+        public long Id { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime TouchedOn { get; set; }
 
+        public string ShortUrl {
+            get { return string.IsNullOrWhiteSpace(CustomUrl) ? UrlGenerator.Encode(Id) : CustomUrl; }
+        }
+
         public string FullShortUrl {
-            get
-            {
-                return ShortenUrl.ToAbsoluteUrl();
+            get {
+                return ShortUrl.ToAbsoluteUrl();
             }
         }
 
