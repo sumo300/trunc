@@ -4,7 +4,7 @@ Trunc is a URL shortening application written using C# and MVC 5, targeting .NET
 
 ## Features ##
 
-* Randomly generated or user-chosen shortened URLs
+* Auto-generated or user-chosen shortened URLs
 * Three (3) types of expiry (Never, By Created date, and By Last Accessed date)
 * Partial localization (App name and tagline for now)
 * Browse and Search - Can't remember a shortened URL or lost it?  Browse or Search for it!
@@ -13,7 +13,7 @@ Trunc is a URL shortening application written using C# and MVC 5, targeting .NET
 
 Out of the box, there is ZERO configuration.  For local debugging purposes, ensure you have IIS Express installed and hit F5 in Visual Studio 2013.  For runtime deployment, use the Visual Studio Publish feature and WebDeploy it to an IIS server or, if you have an Azure account, deploy directly to Azure!  VS 2013's publish features can work directly with Azure, provisioning at the time of publish.  Re-publish with ease.
 
-Trunc uses a SQLite database located in the `~/App_Data/` folder.  Ensure the application pool user has read/write access to this folder.  If a database does not exist yet (UrlItem.db), one will be created.
+Trunc uses a SQLite database located in the `~/App_Data/` folder.  Ensure the application pool user has read/write access to this folder.  If a database does not exist yet (Trunc.db), one will be created.
 
 By default, ELMAH logs locally to the `~/App_Data/ELMAH` folder as XML files.  Browsing the ELMAH page is as simple as navigating to 'http[s]://[YourURL]/elmah'.  It is highly recommended to read [ELMAH's documentation](https://code.google.com/p/elmah/) if you'd like to change the logging location or to secure this page.
 
@@ -30,6 +30,7 @@ By default, ELMAH logs locally to the `~/App_Data/ELMAH` folder as XML files.  B
 * [Bootstrap](http://getbootstrap.com/)
 * [ELMAH](https://code.google.com/p/elmah/)
 * [Ninject](https://github.com/ninject/ninject)
+* [NUnit](http://www.nunit.org/)
 * [SQLite](http://www.sqlite.org/)
 * [WebActivator](https://github.com/davidebbo/WebActivator)
 
