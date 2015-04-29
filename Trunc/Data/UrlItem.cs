@@ -25,7 +25,10 @@ namespace Trunc.Data {
 
         public double ExpireInDays { get; set; }
 
-        public ExpireMode ExpireMode { get; set; }
+        /// <summary>
+        /// Kept as short as Biggy can't implicitly cast enums to integers
+        /// </summary>
+        public short ExpireMode { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

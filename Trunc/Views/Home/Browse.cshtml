@@ -9,7 +9,7 @@
 @using (Html.BeginForm("Browse", "Home", FormMethod.Post, new { role = "form", @class = "form-inline" })) {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <label for="filter">Filter</label>
+        <label for="filter">Find</label>
         <input type="text" id="filter" name="filter" class="form-control input-sm" value="@TempData["filter"]" />
     </div>
     <button type="submit" class="btn btn-primary btn-sm">GO</button>
@@ -17,9 +17,10 @@
 }
 
 <table class="table table-striped">
+    <caption>@Model.TableCaption</caption>
     <tr>
-        <th>CustomUrl</th>
-        <th>OriginUrl</th>
+        <th>Custom Url</th>
+        <th>Origin Url</th>
         <th>Created On</th>
         <th>Last Touched</th>
         <th>Expire Mode</th>
@@ -37,22 +38,22 @@
             </td>
             <td>
                 @item.CreatedOn.ToString("G")
-        </td>
-        <td>
-            @item.TouchedOn.ToString("G")
-        </td>
-        <td>
-            @item.ExpireMode.ToString()
-        </td>
-        <td>
-            @item.ExpiryDate
-        </td>
-        @*<td>
+            </td>
+            <td>
+                @item.TouchedOn.ToString("G")
+            </td>
+            <td>
+                @item.ExpireMode.ToString()
+            </td>
+            <td>
+                @item.ExpiryDate
+            </td>
+            @*<td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>*@
-    </tr>
+        </tr>
     }
 
 </table>

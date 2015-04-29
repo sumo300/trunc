@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
+using Trunc.App_Start;
 using Trunc.Data;
 
 namespace Trunc.Tests.Data {
@@ -8,14 +10,15 @@ namespace Trunc.Tests.Data {
         private TruncRepository _repo;
 
         [TestFixtureSetUp]
-        public void Init() {
+        public void SetUp() {
+            TypeMappingConfig.RegisterTypeMaps();
             _repo = new TruncRepository(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
         }
 
         [Test]
         public void Add() {
             var item = new UrlItem {
-                ExpireMode = ExpireMode.Never,
+                ExpireMode = (short) ExpireMode.Never,
                 OriginUrl = "http://www.google.com/"
             };
 
@@ -23,13 +26,13 @@ namespace Trunc.Tests.Data {
 
             UrlItem storedItem = _repo.GetById(UrlGenerator.Decode(item.CustomUrl));
 
-            Assert.IsNotNull(storedItem);
+            Assert.That(storedItem, Is.Not.Null);
         }
 
         [Test]
         public void Delete() {
             var item = new UrlItem {
-                ExpireMode = ExpireMode.Never,
+                ExpireMode = (short) ExpireMode.Never,
                 OriginUrl = "http://www.google.com/",
                 CustomUrl = "flarg"
             };
@@ -37,7 +40,9 @@ namespace Trunc.Tests.Data {
             _repo.Add(item);
             _repo.Delete(item);
 
-            Assert.IsFalse(_repo.Exists(UrlGenerator.Decode(item.CustomUrl)));
+            var found = _repo.All().FirstOrDefault(i => i.CustomUrl.Equals(item.CustomUrl));
+
+            Assert.That(found, Is.Null);
         }
     }
 }

@@ -23,7 +23,7 @@ CREATE TABLE UrlItem (
     , CustomUrl VARCHAR(1000)
     , OriginUrl VARCHAR(2000) NOT NULL
     , ExpireInDays DOUBLE NOT NULL
-    , ExpireMode TINYINT NOT NULL
+    , ExpireMode SMALLINT NOT NULL
     , CreatedOn DATETIME NOT NULL
     , TouchedOn DATETIME NOT NULL
 );";

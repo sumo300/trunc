@@ -8,8 +8,18 @@ namespace Trunc.App_Start
     {
         public static void RegisterTypeMaps()
         {
-            Mapper.CreateMap<UrlItemModel, UrlItem>().IgnoreAllPropertiesWithAnInaccessibleSetter();
-            Mapper.CreateMap<UrlItem, UrlItemViewModel>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            Mapper.CreateMap<UrlItemModel, UrlItem>()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                .ForMember(dest=>dest.Id, opt=>opt.Ignore())
+                .ForMember(dest => dest.CreatedOn, opt => opt.Ignore())
+                .ForMember(dest => dest.TouchedOn, opt => opt.Ignore())
+                .ForMember(dest => dest.ExpireMode, opt => opt.MapFrom(src => (short) src.ExpireMode));
+
+            Mapper.CreateMap<UrlItem, UrlItemViewModel>()
+                .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                .ForMember(dest => dest.ExpireMode, opt => opt.MapFrom(src => (ExpireMode) src.ExpireMode));
+            
+            Mapper.AssertConfigurationIsValid();
         }
     }
 }

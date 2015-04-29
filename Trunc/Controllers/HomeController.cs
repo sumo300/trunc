@@ -56,7 +56,7 @@ namespace Trunc.Controllers {
 
         [Route("{shortenUrl}")]
         public ActionResult Index(string shortenUrl) {
-            UrlItem item = _repo.GetById(UrlGenerator.Decode(shortenUrl));
+            UrlItem item = _repo.GetById(UrlGenerator.Decode(shortenUrl)) ?? _repo.All().FirstOrDefault(i=>i.CustomUrl.Equals(shortenUrl));
 
             if (item == null) {
                 return View("NotFound");
@@ -75,8 +75,8 @@ namespace Trunc.Controllers {
 
         private bool IsExpired(UrlItem item) {
             DateTime expiry = DateTime.Now.AddDays(1);
-
-            switch (item.ExpireMode) {
+            
+            switch ((ExpireMode)item.ExpireMode) {
                 case ExpireMode.ByCreated:
                     expiry = item.CreatedOn.AddDays(item.ExpireInDays);
                     break;
@@ -88,9 +88,12 @@ namespace Trunc.Controllers {
         }
 
         public ActionResult Browse() {
-            IEnumerable<UrlItem> items = _repo.All();
+            IEnumerable<UrlItem> items = _repo.All()
+                .OrderByDescending(i => i.CreatedOn)
+                .Take(100);
             var model = new BrowseViewModel {
-                Items = Mapper.Map<IEnumerable<UrlItemViewModel>>(items).OrderBy(i => i.ExpiryDate)
+                Items = Mapper.Map<IEnumerable<UrlItemViewModel>>(items),
+                TableCaption = "Displaying the newest 100 URLs"
             };
             return View(model);
         }
@@ -102,14 +105,16 @@ namespace Trunc.Controllers {
                 return View();
             }
 
-            var model = new BrowseViewModel();
+            var model = new BrowseViewModel {
+                TableCaption = string.Format("Displaying the newest 100 URLs filtered by \"{0}\"", filter)
+            };
 
-            IEnumerable<UrlItem> items = _repo.All().Where(item => item.OriginUrl.Contains(filter) ||
-                                                                   item.CustomUrl.Contains(filter));
+            IEnumerable<UrlItem> items = _repo.All()
+                .Where(item => item.OriginUrl.Contains(filter) || item.CustomUrl.Contains(filter))
+                .OrderByDescending(i => i.CreatedOn)
+                .Take(100);
                                     
-            if (items.Any()) {
-                model.Items = Mapper.Map<IEnumerable<UrlItemViewModel>>(items).OrderBy(i => i.ExpiryDate);
-            }
+            model.Items = Mapper.Map<IEnumerable<UrlItemViewModel>>(items);
 
             TempData["filter"] = filter;
 
