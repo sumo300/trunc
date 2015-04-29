@@ -212,4 +212,5 @@ Desktop.ini
 
 ## Trunc Ignores
 App_Data/Trunc.db
+App_Data/data.db
 App_Data/ELMAH/*

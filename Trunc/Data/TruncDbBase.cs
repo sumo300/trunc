@@ -5,11 +5,11 @@ namespace Trunc.Data {
         public BiggyList<UrlItem> Items { get; set; }
 
         public virtual void LoadData() {
-            Items = new BiggyList<UrlItem>(CreateDocumentStoreFor<UrlItem>());
+            Items = new BiggyList<UrlItem>(CreateRelationalStoreFor<UrlItem>());
         }
 
-        public abstract void DropCreateAll();
+        public abstract void DropCreateAll(bool forceDropCreateTables);
 
-        public abstract IDataStore<T> CreateDocumentStoreFor<T>() where T : new();
+        public abstract IDataStore<T> CreateRelationalStoreFor<T>() where T : new();
     }
 }

@@ -15,7 +15,7 @@ namespace Trunc.App_Start
 
     public static class NinjectWebCommon 
     {
-        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        private static readonly Bootstrapper Bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
@@ -24,7 +24,7 @@ namespace Trunc.App_Start
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
-            bootstrapper.Initialize(CreateKernel);
+            Bootstrapper.Initialize(CreateKernel);
         }
         
         /// <summary>
@@ -32,7 +32,7 @@ namespace Trunc.App_Start
         /// </summary>
         public static void Stop()
         {
-            bootstrapper.ShutDown();
+            Bootstrapper.ShutDown();
         }
         
         /// <summary>
@@ -64,7 +64,13 @@ namespace Trunc.App_Start
         private static void RegisterServices(IKernel kernel) {
             kernel.Bind<IRepository<UrlItem>>()
                 .To<TruncRepository>()
-                .WithConstructorArgument<string>(AppDomain.CurrentDomain.GetData("DataDirectory").ToString());
+                .InSingletonScope()
+                .WithConstructorArgument(AppDomain.CurrentDomain.GetData("DataDirectory").ToString())
+                .WithConstructorArgument(
+#if DEBUG
+                true
+#endif
+                );
         }        
     }
 }

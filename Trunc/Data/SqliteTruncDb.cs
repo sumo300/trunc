@@ -7,22 +7,37 @@ namespace Trunc.Data {
 
         public IDbCore Database { get { return _db; } }
 
-        public SqliteTruncDb(string dbDirectory, string databaseName, bool dropCreateTables = false) {
+        public SqliteTruncDb(string dbDirectory, string databaseName = "data.db", bool forceDropCreateTables = false) {
             _db = new SqliteDbCore(dbDirectory, databaseName);
-
-            if (dropCreateTables) {
-                DropCreateAll();
-            }
+            
+            DropCreateAll(forceDropCreateTables);
 
             LoadData();
         }
 
-        public override void DropCreateAll() {
+        public override void DropCreateAll(bool forceDropCreateTables) {
+            const string urlItemSql =
+                @"
+CREATE TABLE UrlItem ( 
+    Id INTEGER PRIMARY KEY AUTOINCREMENT
+    , CustomUrl VARCHAR(1000)
+    , OriginUrl VARCHAR(2000) NOT NULL
+    , ExpireInDays DOUBLE NOT NULL
+    , ExpireMode TINYINT NOT NULL
+    , CreatedOn DATETIME NOT NULL
+    , TouchedOn DATETIME NOT NULL
+);";
+
+            if (!forceDropCreateTables && _db.TableExists("UrlItem")) {
+                return;
+            }
+
             _db.TryDropTable("UrlItem");
+            int result = _db.TransactDDL(urlItemSql);
         }
 
-        public override IDataStore<T> CreateDocumentStoreFor<T>() {
-            return _db.CreateDocumentStoreFor<T>();
+        public override IDataStore<T> CreateRelationalStoreFor<T>() {
+            return _db.CreateRelationalStoreFor<T>();
         }
     }
 }

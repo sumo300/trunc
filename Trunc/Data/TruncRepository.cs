@@ -5,8 +5,8 @@ namespace Trunc.Data {
     public class TruncRepository : IRepository<UrlItem> {
         private readonly SqliteTruncDb _store;
 
-        public TruncRepository(string dataDirectory) {
-            _store = new SqliteTruncDb(dataDirectory, "Trunc.db");
+        public TruncRepository(string dataDirectory, bool forceDropCreateTables = false) {
+            _store = new SqliteTruncDb(dataDirectory, forceDropCreateTables:forceDropCreateTables);
         }
 
         #region IRepository<UrlItem> Members
