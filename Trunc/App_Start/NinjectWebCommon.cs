@@ -66,11 +66,12 @@ namespace Trunc.App_Start
                 .To<TruncRepository>()
                 .InSingletonScope()
                 .WithConstructorArgument(AppDomain.CurrentDomain.GetData("DataDirectory").ToString())
-                .WithConstructorArgument(
 #if DEBUG
-                true
+                .WithConstructorArgument(
+                    true
+                )
 #endif
-                );
+                ;
         }        
     }
 }
