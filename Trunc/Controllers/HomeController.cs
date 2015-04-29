@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web.Mvc;
+using System.Web.UI;
 using AutoMapper;
 using Trunc.Data;
 using Trunc.Models;
@@ -55,6 +57,7 @@ namespace Trunc.Controllers {
         }
 
         [Route("{shortenUrl}")]
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "*", Location = OutputCacheLocation.Server)]
         public ActionResult Index(string shortenUrl) {
             UrlItem item = _repo.GetById(UrlGenerator.Decode(shortenUrl)) ?? _repo.All().FirstOrDefault(i=>i.CustomUrl.Equals(shortenUrl));
 
