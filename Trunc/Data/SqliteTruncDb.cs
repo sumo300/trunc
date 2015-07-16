@@ -1,4 +1,5 @@
-﻿using Biggy.Core;
+﻿using System.IO;
+using Biggy.Core;
 using Biggy.Data.Sqlite;
 
 namespace Trunc.Data {
@@ -10,7 +11,12 @@ namespace Trunc.Data {
         public SqliteTruncDb(string dbDirectory, bool forceDropCreateTables = false) {
             const string databaseName = "data.db";
             _db = new SqliteDbCore(dbDirectory, databaseName);
-            
+
+            // Initialize database if it hasn't been created yet
+            if (!File.Exists(Path.Combine(dbDirectory, databaseName))) {
+                forceDropCreateTables = true;
+            }
+
             DropCreateAll(forceDropCreateTables);
 
             LoadData();
@@ -42,13 +48,14 @@ CREATE TABLE UrlHit (
 
             if (_db.TableExists("UrlItem")) {
                 _db.TryDropTable("UrlItem");
-                _db.TransactDDL(urlItemSql);
             }
 
             if (_db.TableExists("UrlHit")) {
                 _db.TryDropTable("UrlHit");
-                _db.TransactDDL(urlHitSql);
             }
+
+            _db.TransactDDL(urlItemSql);
+            _db.TransactDDL(urlHitSql);
         }
 
         public override IDataStore<T> CreateRelationalStoreFor<T>() {
