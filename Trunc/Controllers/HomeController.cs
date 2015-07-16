@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Web.Mvc;
 using AutoMapper;
 using Trunc.Data;
@@ -10,10 +9,12 @@ using Trunc.Models;
 
 namespace Trunc.Controllers {
     public class HomeController : Controller {
-        private readonly IRepository<UrlItem> _repo;
+        private readonly IRepository<UrlItem> _urlRepo;
+        private readonly IRepository<UrlHit> _hitRepo;
 
-        public HomeController(IRepository<UrlItem> repo) {
-            _repo = repo;
+        public HomeController(IRepository<UrlItem> urlRepo, IRepository<UrlHit> hitRepo) {
+            _urlRepo = urlRepo;
+            _hitRepo = hitRepo;
         }
 
         public ActionResult Index() {
@@ -35,7 +36,7 @@ namespace Trunc.Controllers {
             UrlItem item;
 
             if (!string.IsNullOrWhiteSpace(model.CustomUrl)) {
-                item = _repo.All().FirstOrDefault(i => i.CustomUrl == model.CustomUrl);
+                item = _urlRepo.All().FirstOrDefault(i => i.CustomUrl == model.CustomUrl);
 
                 if (item != null) {
                     return View("Exists", Mapper.Map<UrlItemViewModel>(item));
@@ -45,7 +46,7 @@ namespace Trunc.Controllers {
             item = Mapper.Map<UrlItem>(model);
 
             try {
-                _repo.Add(item);
+                _urlRepo.Add(item);
             } catch (Exception e) {
                 Debug.WriteLine(e);
                 return View("Exists", Mapper.Map<UrlItemViewModel>(item));
@@ -56,20 +57,25 @@ namespace Trunc.Controllers {
 
         [Route("{shortenUrl}")]
         public ActionResult Index(string shortenUrl) {
-            UrlItem item = _repo.GetById(UrlGenerator.Decode(shortenUrl)) ?? _repo.All().FirstOrDefault(i=>i.CustomUrl.Equals(shortenUrl));
+            UrlItem item = _urlRepo.GetById(UrlGenerator.Decode(shortenUrl)) ?? _urlRepo.All().FirstOrDefault(i=>i.CustomUrl.Equals(shortenUrl));
 
             if (item == null) {
                 return View("NotFound");
             }
 
             if (IsExpired(item)) {
-                _repo.Delete(item);
+                _urlRepo.Delete(item);
                 return View("Expired");
             }
 
-            item.TouchedOn = DateTime.Now;
-            _repo.Update(item);
-
+            var urlHit = new UrlHit {
+                UrlItemId = item.Id,
+                ClientIp = Request.UserHostAddress
+            };
+            
+            _urlRepo.Update(item);
+            _hitRepo.Add(urlHit);
+            
             return Redirect(item.OriginUrl);
         }
 
@@ -81,20 +87,22 @@ namespace Trunc.Controllers {
                     expiry = item.CreatedOn.AddDays(item.ExpireInDays);
                     break;
                 case ExpireMode.ByLastAccessed:
-                    expiry = item.TouchedOn.AddDays(item.ExpireInDays);
+                    var lastTouched = _hitRepo.All().Where(h => h.UrlItemId == item.Id).Max(h => h.HitOn);
+                    expiry = lastTouched.AddDays(item.ExpireInDays);
                     break;
             }
             return DateTime.Now > expiry;
         }
 
         public ActionResult Browse() {
-            IEnumerable<UrlItem> items = _repo.All()
-                .OrderByDescending(i => i.CreatedOn)
-                .Take(100);
+            IEnumerable<UrlItem> items = _urlRepo.All().OrderByDescending(i => i.CreatedOn);
+            var itemsWithLastHit = GetUrlItemsForViewModel(items);
+
             var model = new BrowseViewModel {
-                Items = Mapper.Map<IEnumerable<UrlItemViewModel>>(items),
+                Items = itemsWithLastHit.Take(100),
                 TableCaption = "Displaying the newest 100 URLs"
             };
+
             return View(model);
         }
 
@@ -109,16 +117,61 @@ namespace Trunc.Controllers {
                 TableCaption = string.Format("Displaying the newest 100 URLs filtered by \"{0}\"", filter)
             };
 
-            IEnumerable<UrlItem> items = _repo.All()
-                .Where(item => item.OriginUrl.Contains(filter) || item.CustomUrl.Contains(filter))
+            IEnumerable<UrlItem> items = _urlRepo.All()
                 .OrderByDescending(i => i.CreatedOn)
-                .Take(100);
-                                    
-            model.Items = Mapper.Map<IEnumerable<UrlItemViewModel>>(items);
+                .Where(item => item.OriginUrl.Contains(filter) || item.CustomUrl.Contains(filter));
+
+            var itemsWithLastHit = GetUrlItemsForViewModel(items);
+
+            model.Items = itemsWithLastHit.Take(100);
 
             TempData["filter"] = filter;
 
             return View(model);
+        }
+
+        private IEnumerable<UrlItemViewModel> GetUrlItemsForViewModel(IEnumerable<UrlItem> items) {
+            IEnumerable<UrlHit> hits = _hitRepo.All();
+
+            var hitCount = hits
+                .GroupBy(x => x.UrlItemId)
+                .Select(grouping => new HitModel {
+                    UrlItemId = grouping.Key,
+                    HitCount = grouping.Count()
+                });
+
+            var maxHit = hits
+                    .GroupBy(x => x.UrlItemId)
+                    .Select(grouping => new LatestHitModel {
+                        UrlItemId = grouping.Key,
+                        HitOn = grouping.Max(x => x.HitOn)
+                    });
+
+            return items.GroupJoin(hitCount, item => item.Id, hc => hc.UrlItemId, (x, y) => {
+                HitModel hit = y.FirstOrDefault();
+                return new UrlItemViewModel {
+                    CreatedOn = x.CreatedOn,
+                    CustomUrl = x.CustomUrl,
+                    ExpireInDays = (int) x.ExpireInDays,
+                    ExpireMode = (ExpireMode) x.ExpireMode,
+                    HitCount = hit == null ? 0 : hit.HitCount,
+                    Id = x.Id,
+                    OriginUrl = x.OriginUrl
+                };
+            })
+            .GroupJoin(maxHit, item => item.Id, mh => mh.UrlItemId, (x, y) => {
+                LatestHitModel latest = y.FirstOrDefault();
+                return new UrlItemViewModel {
+                    CreatedOn = x.CreatedOn,
+                    CustomUrl = x.CustomUrl,
+                    ExpireInDays = x.ExpireInDays,
+                    ExpireMode = x.ExpireMode,
+                    HitCount = x.HitCount,
+                    Id = x.Id,
+                    OriginUrl = x.OriginUrl,
+                    TouchedOn = latest == null ? (DateTime?)null : latest.HitOn
+                };
+            });
         }
     }
 }

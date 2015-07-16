@@ -10,19 +10,23 @@ using Trunc.Models;
 namespace Trunc.Tests.Controllers {
     [TestFixture]
     public class HomeControllerTest {
-        private IRepository<UrlItem> _repository;
+        private IRepository<UrlItem> _repo;
+        private IRepository<UrlHit> _hitRepo;
         private const string InvalidFilter = "xxxxxxxxxxxxxxxx";
 
         [TestFixtureSetUp]
         public void SetUp() {
             TypeMappingConfig.RegisterTypeMaps();
-            _repository = new TruncRepository(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
+            var store = new SqliteTruncDb(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, true);
+            _repo = new UrlItemRepository(store);
+            _hitRepo = new UrlHitRepository(store);
+
         }
 
         [Test]
         public void Index() {
             // Arrange
-            var controller = new HomeController(_repository);
+            var controller = new HomeController(_repo, _hitRepo);
 
             // Act
             var result = controller.Index() as ViewResult;
@@ -34,7 +38,7 @@ namespace Trunc.Tests.Controllers {
         [Test]
         public void Browse() {
             // Arrange
-            var controller = new HomeController(_repository);
+            var controller = new HomeController(_repo, _hitRepo);
 
             // Act
             var result = controller.Browse() as ViewResult;
@@ -46,7 +50,7 @@ namespace Trunc.Tests.Controllers {
         [Test]
         public void Browse_InvalidFilter_ReturnsEmptyItemList() {
             // Arrange
-            var controller = new HomeController(_repository);
+            var controller = new HomeController(_repo, _hitRepo);
 
             // Act
             var result = controller.Browse(InvalidFilter) as ViewResult;

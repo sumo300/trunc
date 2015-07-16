@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Trunc.Data;
 
 namespace Trunc.Models {
     public class BrowseViewModel {
