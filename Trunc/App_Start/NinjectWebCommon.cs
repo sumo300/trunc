@@ -62,16 +62,24 @@ namespace Trunc.App_Start
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel) {
-            kernel.Bind<IRepository<UrlItem>>()
-                .To<TruncRepository>()
+            string dataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+
+            kernel.Bind<TruncDbBase>()
+                .To<SqliteTruncDb>()
                 .InSingletonScope()
-                .WithConstructorArgument(AppDomain.CurrentDomain.GetData("DataDirectory").ToString())
+                .WithConstructorArgument(dataDirectory)
 #if DEBUG
-                .WithConstructorArgument(
-                    true
-                )
+                .WithConstructorArgument("forceDropCreateTables", true)
 #endif
                 ;
+
+            kernel.Bind<IRepository<UrlItem>>()
+                .To<UrlItemRepository>()
+                .InSingletonScope();
+
+            kernel.Bind<IRepository<UrlHit>>()
+                .To<UrlHitRepository>()
+                .InSingletonScope();
         }        
     }
 }

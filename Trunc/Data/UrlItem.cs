@@ -1,23 +1,19 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using Biggy.Core;
 
 namespace Trunc.Data {
-    public class UrlItem {
+    public class UrlItem : IEquatable<UrlItem> {
         private string _customUrl;
 
         public UrlItem() {
             CreatedOn = DateTime.Now;
-            TouchedOn = DateTime.Now;
         }
 
         [PrimaryKey(true)]
         public int Id { get; set; }
 
         public string CustomUrl {
-            get {
-                return string.IsNullOrWhiteSpace(_customUrl) ? UrlGenerator.Encode(Id) : _customUrl;
-            }
+            get { return string.IsNullOrWhiteSpace(_customUrl) ? UrlGenerator.Encode(Id) : _customUrl; }
             set { _customUrl = value; }
         }
 
@@ -26,23 +22,49 @@ namespace Trunc.Data {
         public double ExpireInDays { get; set; }
 
         /// <summary>
-        /// Kept as short as Biggy can't implicitly cast enums to integers
+        ///     Kept as short as Biggy can't implicitly cast enums to integers
         /// </summary>
         public short ExpireMode { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
-        public DateTime TouchedOn { get; set; }
-    }
+        #region IEquatable<UrlItem> Members
 
-    public enum ExpireMode {
-        [Display(Name = "Never")]
-        Never = 0,
+        public bool Equals(UrlItem other) {
+            if (ReferenceEquals(null, other)) {
+                return false;
+            }
+            if (ReferenceEquals(this, other)) {
+                return true;
+            }
+            return Id == other.Id && string.Equals(OriginUrl, other.OriginUrl) && ExpireInDays.Equals(other.ExpireInDays) && ExpireMode == other.ExpireMode &&
+                   CreatedOn.Equals(other.CreatedOn);
+        }
 
-        [Display(Name = "By Created")]
-        ByCreated = 1,
+        #endregion
 
-        [Display(Name = "By Last Accessed")]
-        ByLastAccessed = 2,
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) {
+                return false;
+            }
+            if (ReferenceEquals(this, obj)) {
+                return true;
+            }
+            if (obj.GetType() != GetType()) {
+                return false;
+            }
+            return Equals((UrlItem) obj);
+        }
+
+        public override int GetHashCode() {
+            unchecked {
+                int hashCode = Id;
+                hashCode = (hashCode * 397) ^ (OriginUrl != null ? OriginUrl.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ ExpireInDays.GetHashCode();
+                hashCode = (hashCode * 397) ^ ExpireMode.GetHashCode();
+                hashCode = (hashCode * 397) ^ CreatedOn.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 }

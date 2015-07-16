@@ -25,6 +25,7 @@
         <th>Last Touched</th>
         <th>Expire Mode</th>
         <th>Expires On</th>
+        <th>Hits</th>
         @*<th></th>*@
     </tr>
 
@@ -37,16 +38,19 @@
                 <abbr title="@item.OriginUrl">@item.OriginUrlForDisplay</abbr>
             </td>
             <td>
-                @item.CreatedOn.ToString("G")
+                @item.CreatedOnFormatted
             </td>
             <td>
-                @item.TouchedOn.ToString("G")
+                @item.TouchedOnFormatted
             </td>
             <td>
                 @item.ExpireMode.ToString()
             </td>
             <td>
                 @item.ExpiryDate
+            </td>
+            <td>
+                @item.HitCount
             </td>
             @*<td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

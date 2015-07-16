@@ -7,12 +7,13 @@ using Trunc.Data;
 namespace Trunc.Tests.Data {
     [TestFixture]
     public class TruncRepositoryTests {
-        private TruncRepository _repo;
+        private UrlItemRepository _repo;
 
         [TestFixtureSetUp]
         public void SetUp() {
             TypeMappingConfig.RegisterTypeMaps();
-            _repo = new TruncRepository(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
+            var store = new SqliteTruncDb(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, true);
+            _repo = new UrlItemRepository(store);
         }
 
         [Test]

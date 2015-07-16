@@ -87,6 +87,9 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject.Extensions.Interception">
+      <HintPath>..\packages\Ninject.Extensions.Interception.3.2.0.0\lib\net45-full\Ninject.Extensions.Interception.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject.Web.Common">
       <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
     </Reference>
@@ -171,18 +174,23 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\TypeMappingConfig.cs" />
+    <Compile Include="Data\ExpireMode.cs" />
     <Compile Include="Data\SqliteTruncDb.cs" />
     <Compile Include="Data\TruncDbBase.cs" />
+    <Compile Include="Data\UrlHit.cs" />
+    <Compile Include="Data\UrlHitRepository.cs" />
     <Compile Include="Data\UrlUtilities.cs" />
     <Compile Include="Models\BrowseViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\IRepository.cs" />
-    <Compile Include="Data\TruncRepository.cs" />
+    <Compile Include="Data\UrlItemRepository.cs" />
     <Compile Include="Data\UrlGenerator.cs" />
     <Compile Include="Data\UrlItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\HitModel.cs" />
+    <Compile Include="Models\LatestHitModel.cs" />
     <Compile Include="Models\UrlItemModel.cs" />
     <Compile Include="Models\UrlItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

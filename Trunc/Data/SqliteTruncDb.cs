@@ -7,7 +7,8 @@ namespace Trunc.Data {
 
         public IDbCore Database { get { return _db; } }
 
-        public SqliteTruncDb(string dbDirectory, string databaseName = "data.db", bool forceDropCreateTables = false) {
+        public SqliteTruncDb(string dbDirectory, bool forceDropCreateTables = false) {
+            const string databaseName = "data.db";
             _db = new SqliteDbCore(dbDirectory, databaseName);
             
             DropCreateAll(forceDropCreateTables);
@@ -16,6 +17,10 @@ namespace Trunc.Data {
         }
 
         public override void DropCreateAll(bool forceDropCreateTables) {
+            if (!forceDropCreateTables) {
+                return;
+            }
+
             const string urlItemSql =
                 @"
 CREATE TABLE UrlItem ( 
@@ -25,15 +30,25 @@ CREATE TABLE UrlItem (
     , ExpireInDays DOUBLE NOT NULL
     , ExpireMode SMALLINT NOT NULL
     , CreatedOn DATETIME NOT NULL
-    , TouchedOn DATETIME NOT NULL
+);";
+            const string urlHitSql =
+                @"
+CREATE TABLE UrlHit (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT
+    , UrlItemId INTEGER
+    , ClientIp VARCHAR(45)
+    , HitOn DATETIME NOT NULL
 );";
 
-            if (!forceDropCreateTables && _db.TableExists("UrlItem")) {
-                return;
+            if (_db.TableExists("UrlItem")) {
+                _db.TryDropTable("UrlItem");
+                _db.TransactDDL(urlItemSql);
             }
 
-            _db.TryDropTable("UrlItem");
-            int result = _db.TransactDDL(urlItemSql);
+            if (_db.TableExists("UrlHit")) {
+                _db.TryDropTable("UrlHit");
+                _db.TransactDDL(urlHitSql);
+            }
         }
 
         public override IDataStore<T> CreateRelationalStoreFor<T>() {
