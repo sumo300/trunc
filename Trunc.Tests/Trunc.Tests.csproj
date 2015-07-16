@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trunc\Trunc.csproj">
-      <Project>{359862C0-9E3B-4120-883A-75E4D1DB5502}</Project>
+      <Project>{359862c0-9e3b-4120-883a-75e4d1db5502}</Project>
       <Name>Trunc</Name>
     </ProjectReference>
   </ItemGroup>
