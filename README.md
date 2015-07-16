@@ -8,6 +8,7 @@ Trunc is a URL shortening application written using C# and MVC 5, targeting .NET
 * Three (3) types of expiry (Never, By Created date, and By Last Accessed date)
 * Partial localization (App name and tagline for now)
 * Browse and Search - Can't remember a shortened URL or lost it?  Browse or Search for it!
+* Hit Counts - Keeps track of every hit to a shortened URL
 
 ## Setup ##
 
@@ -20,7 +21,6 @@ By default, ELMAH logs locally to the `~/App_Data/ELMAH` folder as XML files.  B
 ## Roadmap ##
 
 * Full localization
-* Hit counts
 * Database migrations (if there is any need to change the data model)
 * Upgrade to .NET Core 5 to support cross-platform deployments
 
