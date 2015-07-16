@@ -10,12 +10,13 @@ namespace Trunc.Data {
 
         public SqliteTruncDb(string dbDirectory, bool forceDropCreateTables = false) {
             const string databaseName = "data.db";
-            _db = new SqliteDbCore(dbDirectory, databaseName);
 
             // Initialize database if it hasn't been created yet
             if (!File.Exists(Path.Combine(dbDirectory, databaseName))) {
                 forceDropCreateTables = true;
             }
+
+            _db = new SqliteDbCore(dbDirectory, databaseName);
 
             DropCreateAll(forceDropCreateTables);
 
