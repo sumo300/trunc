@@ -2,13 +2,13 @@
 
 namespace Trunc.Data {
     public enum ExpireMode {
-        [Display(Name = "Never")]
+        [Display(ResourceType = typeof (ModelRes.ExpireMode), Name = "Never")]
         Never = 0,
 
-        [Display(Name = "By Created")]
+        [Display(ResourceType = typeof (ModelRes.ExpireMode), Name = "ByCreated")]
         ByCreated = 1,
 
-        [Display(Name = "By Last Accessed")]
+        [Display(ResourceType = typeof (ModelRes.ExpireMode), Name = "ByLastAccessed")]
         ByLastAccessed = 2,
     }
 }
