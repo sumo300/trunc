@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApplicationName" xml:space="preserve">
-    <value>Trunc</value>
+  <data name="CreateButtonText" xml:space="preserve">
+    <value>Create</value>
   </data>
-  <data name="Tagline" xml:space="preserve">
-    <value>{0} is a magical URL shortener!</value>
+  <data name="CustomUrlPlaceHolder" xml:space="preserve">
+    <value>Keep it empty to generate automatically</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Home</value>
   </data>
 </root>

@@ -1,12 +1,12 @@
 ﻿@model Trunc.Models.UrlItemModel
 
 @{
-    ViewBag.Title = "Home";
+    ViewBag.Title = ViewRes.Index.Title;
 }
 
 <div class="jumbotron">
-    <h1>@Resources.Site.ApplicationName</h1>
-    <p class="lead">@string.Format(Resources.Site.Tagline, Resources.Site.ApplicationName)</p>
+    <h1>@ViewRes.SharedStrings.ApplicationName</h1>
+    <p class="lead">@string.Format(ViewRes.SharedStrings.Tagline, ViewRes.SharedStrings.ApplicationName)</p>
 </div>
 
 <div class="well">
@@ -28,7 +28,7 @@
                 <div class="col-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-resize-small"></span></span>
-                        @Html.TextBoxFor(m => m.CustomUrl, new { @class = "form-control", placeHolder = "Keep it empty to generate automatically" })
+                        @Html.TextBoxFor(m => m.CustomUrl, new { @class = "form-control", placeHolder = ViewRes.Index.CustomUrlPlaceHolder })
                     </div>
                     @Html.ValidationMessageFor(m => m.CustomUrl, "", new { @class = "text-danger" })
                 </div>
@@ -54,7 +54,7 @@
             <div class="form-group">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">@ViewRes.Index.CreateButtonText</button>
                 </div>
             </div>
         </fieldset>
