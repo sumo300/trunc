@@ -10,11 +10,17 @@ Trunc is a URL shortening application written using C# and MVC 5, targeting .NET
 * Browse and Search - Can't remember a shortened URL or lost it?  Browse or Search for it!
 * Hit Counts - Keeps track of every hit to a shortened URL
 
+## Demo ##
+
+A demo is hosted on Azure Web Sites.  Commits pushed here are automatically built and deployed to the demo site.  It typically only takes a few seconds for the new changes to appear.
+
+http://trunc.azurewebsites.net/
+
 ## Setup ##
 
 Out of the box, there is ZERO configuration.  For local debugging purposes, ensure you have IIS Express installed and hit F5 in Visual Studio 2013.  For runtime deployment, use the Visual Studio Publish feature and WebDeploy it to an IIS server or, if you have an Azure account, deploy directly to Azure!  VS 2013's publish features can work directly with Azure, provisioning at the time of publish.  Re-publish with ease.
 
-Trunc uses a SQLite database located in the `~/App_Data/` folder.  Ensure the application pool user has read/write access to this folder.  If a database does not exist yet (Trunc.db), one will be created.
+Trunc uses a SQLite database located in the `~/App_Data/` folder.  Ensure the application pool user has read/write access to this folder.  If a database does not exist yet (data.db), one will be created.
 
 By default, ELMAH logs locally to the `~/App_Data/ELMAH` folder as XML files.  Browsing the ELMAH page is as simple as navigating to 'http[s]://[YourURL]/elmah'.  It is highly recommended to read [ELMAH's documentation](https://code.google.com/p/elmah/) if you'd like to change the logging location or to secure this page.
 
