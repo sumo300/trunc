@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CreateButtonText" xml:space="preserve">
-    <value>Create</value>
+  <data name="CreatedOn" xml:space="preserve">
+    <value>Created On</value>
   </data>
-  <data name="CustomUrlPlaceHolder" xml:space="preserve">
-    <value>Keep it empty to generate automatically</value>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>Expires On</value>
+  </data>
+  <data name="HitCount" xml:space="preserve">
+    <value>Hits</value>
+  </data>
+  <data name="TouchedOn" xml:space="preserve">
+    <value>Last Touched</value>
   </data>
 </root>

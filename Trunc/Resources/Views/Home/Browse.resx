@@ -117,10 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CreateButtonText" xml:space="preserve">
-    <value>Create</value>
+  <data name="Find" xml:space="preserve">
+    <value>Find</value>
   </data>
-  <data name="CustomUrlPlaceHolder" xml:space="preserve">
-    <value>Keep it empty to generate automatically</value>
+  <data name="GoButton" xml:space="preserve">
+    <value>GO</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="TableCaptionNewest100" xml:space="preserve">
+    <value>Displaying the newest 100 URLs</value>
+  </data>
+  <data name="TableCaptionNewest100Filtered" xml:space="preserve">
+    <value>Displaying the newest 100 URLs filtered by "{0}"</value>
   </data>
 </root>

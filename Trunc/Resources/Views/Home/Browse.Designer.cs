@@ -22,14 +22,14 @@ namespace ViewRes {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Index {
+    public class Browse {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal Browse() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ViewRes {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Trunc.Resources.Views.Home.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Trunc.Resources.Views.Home.Browse", typeof(Browse).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,47 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create.
+        ///   Looks up a localized string similar to Find.
         /// </summary>
-        public static string CreateButtonText {
+        public static string Find {
             get {
-                return ResourceManager.GetString("CreateButtonText", resourceCulture);
+                return ResourceManager.GetString("Find", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keep it empty to generate automatically.
+        ///   Looks up a localized string similar to GO.
         /// </summary>
-        public static string CustomUrlPlaceHolder {
+        public static string GoButton {
             get {
-                return ResourceManager.GetString("CustomUrlPlaceHolder", resourceCulture);
+                return ResourceManager.GetString("GoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Displaying the newest 100 URLs.
+        /// </summary>
+        public static string TableCaptionNewest100 {
+            get {
+                return ResourceManager.GetString("TableCaptionNewest100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Displaying the newest 100 URLs filtered by &quot;{0}&quot;.
+        /// </summary>
+        public static string TableCaptionNewest100Filtered {
+            get {
+                return ResourceManager.GetString("TableCaptionNewest100Filtered", resourceCulture);
             }
         }
     }
