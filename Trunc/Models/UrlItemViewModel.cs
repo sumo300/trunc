@@ -15,7 +15,7 @@ namespace Trunc.Models {
         public DateTime? TouchedOn { get; set; }
 
         public string TouchedOnFormatted {
-            get { return TouchedOn.HasValue ? TouchedOn.Value.ToString("G") : "Never"; }
+            get { return TouchedOn.HasValue ? TouchedOn.Value.ToString("G") : ModelRes.ExpireMode.Never; }
         }
 
         public string ShortUrl {
@@ -45,7 +45,7 @@ namespace Trunc.Models {
                     case ExpireMode.ByCreated:
                         return CreatedOn.AddDays(ExpireInDays).ToString("G");
                     case ExpireMode.ByLastAccessed:
-                        return TouchedOn.HasValue ? TouchedOn.Value.AddDays(ExpireInDays).ToString("G") : "Never";
+                        return TouchedOn.HasValue ? TouchedOn.Value.AddDays(ExpireInDays).ToString("G") : ModelRes.ExpireMode.Never;
                     default:
                         return "N/A";
                 }
