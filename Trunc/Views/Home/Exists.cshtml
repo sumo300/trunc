@@ -1,10 +1,10 @@
 ﻿@model Trunc.Models.UrlItemViewModel
 
 @{
-    ViewBag.Title = "Already Exists";
+    ViewBag.Title = @ViewRes.Exists.Title;
 }
 
 <h2>@ViewBag.Title</h2>
 <h3>
-    The URL is <a href="@Model.FullShortUrl">@Model.FullShortUrl</a>
+    @ViewRes.Exists.ExistsMessage <a href="@Model.FullShortUrl">@Model.FullShortUrl</a>
 </h3>

@@ -185,6 +185,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Browse.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Views\Home\Exists.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Exists.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Home\Index.Designer.cs">
       <DependentUpon>Index.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -255,6 +260,14 @@
       <LastGenOutput>Browse.Designer.cs</LastGenOutput>
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Home\Exists.es.resx">
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Home\Exists.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Exists.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Home\Index.es.resx">
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
