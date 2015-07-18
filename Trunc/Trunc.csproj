@@ -190,6 +190,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Exists.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Views\Home\Expired.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Expired.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Home\Index.Designer.cs">
       <DependentUpon>Index.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -267,6 +272,14 @@
     <EmbeddedResource Include="Resources\Views\Home\Exists.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Exists.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Home\Expired.es.resx">
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Home\Expired.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Expired.Designer.cs</LastGenOutput>
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Home\Index.es.resx">
