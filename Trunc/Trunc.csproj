@@ -225,6 +225,11 @@
     <Compile Include="Models\UrlItemModel.cs" />
     <Compile Include="Models\UrlItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Views\Home\Success.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Success.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Shared\SharedStrings.Designer.cs">
       <DependentUpon>SharedStrings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -284,6 +289,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Home\Index.es.resx">
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Home\Success.es.resx">
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Home\Success.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Success.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Shared\SharedStrings.es.resx">
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
