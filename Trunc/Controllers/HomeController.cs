@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Web.Mvc;
-using System.Web.UI;
 using AutoMapper;
 using Trunc.Data;
 using Trunc.Models;

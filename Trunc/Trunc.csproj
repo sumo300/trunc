@@ -171,6 +171,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resources\Models\ExpireMode.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExpireMode.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Models\UrlItemModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -259,6 +264,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <EmbeddedResource Include="Resources\Models\ExpireMode.es.resx">
+      <CustomToolNamespace>ModelRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\ExpireMode.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExpireMode.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ModelRes</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Models\UrlItemViewModel.es.resx">
       <CustomToolNamespace>ModelRes</CustomToolNamespace>
     </EmbeddedResource>
