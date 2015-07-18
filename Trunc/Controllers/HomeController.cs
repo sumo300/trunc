@@ -103,7 +103,7 @@ namespace Trunc.Controllers {
 
             var model = new BrowseViewModel {
                 Items = itemsWithLastHit.Take(100),
-                TableCaption = "Displaying the newest 100 URLs"
+                TableCaption = ViewRes.Browse.TableCaptionNewest100
             };
 
             return View(model);
@@ -117,7 +117,7 @@ namespace Trunc.Controllers {
             }
 
             var model = new BrowseViewModel {
-                TableCaption = string.Format("Displaying the newest 100 URLs filtered by \"{0}\"", filter)
+                TableCaption = string.Format(ViewRes.Browse.TableCaptionNewest100Filtered, filter)
             };
 
             IEnumerable<UrlItem> items = _urlRepo.All()

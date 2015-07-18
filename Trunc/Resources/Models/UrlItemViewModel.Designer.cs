@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ViewRes {
+namespace ModelRes {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace ViewRes {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Index {
+    public class UrlItemViewModel {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal UrlItemViewModel() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ViewRes {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Trunc.Resources.Views.Home.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Trunc.Resources.Models.UrlItemViewModel", typeof(UrlItemViewModel).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,38 @@ namespace ViewRes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create.
+        ///   Looks up a localized string similar to Created On.
         /// </summary>
-        public static string CreateButtonText {
+        public static string CreatedOn {
             get {
-                return ResourceManager.GetString("CreateButtonText", resourceCulture);
+                return ResourceManager.GetString("CreatedOn", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keep it empty to generate automatically.
+        ///   Looks up a localized string similar to Expires On.
         /// </summary>
-        public static string CustomUrlPlaceHolder {
+        public static string ExpiryDate {
             get {
-                return ResourceManager.GetString("CustomUrlPlaceHolder", resourceCulture);
+                return ResourceManager.GetString("ExpiryDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hits.
+        /// </summary>
+        public static string HitCount {
+            get {
+                return ResourceManager.GetString("HitCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Touched.
+        /// </summary>
+        public static string TouchedOn {
+            get {
+                return ResourceManager.GetString("TouchedOn", resourceCulture);
             }
         }
     }

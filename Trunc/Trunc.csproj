@@ -175,6 +175,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UrlItemModel.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Models\UrlItemViewModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UrlItemViewModel.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Home\Browse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Browse.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Home\Index.Designer.cs">
       <DependentUpon>Index.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -228,6 +238,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <EmbeddedResource Include="Resources\Models\UrlItemViewModel.es.resx">
+      <CustomToolNamespace>ModelRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\UrlItemViewModel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UrlItemViewModel.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ModelRes</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Home\Browse.es.resx">
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Home\Browse.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Browse.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ViewRes</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Home\Index.es.resx">
       <CustomToolNamespace>ViewRes</CustomToolNamespace>
     </EmbeddedResource>

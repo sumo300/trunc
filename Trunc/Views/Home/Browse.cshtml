@@ -1,7 +1,7 @@
 ﻿@model Trunc.Models.BrowseViewModel
 
 @{
-    ViewBag.Title = "Browse";
+    ViewBag.Title = @ViewRes.SharedStrings.Browse;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -9,23 +9,23 @@
 @using (Html.BeginForm("Browse", "Home", FormMethod.Post, new { role = "form", @class = "form-inline" })) {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <label for="filter">Find</label>
+        <label for="filter">@ViewRes.Browse.Find</label>
         <input type="text" id="filter" name="filter" class="form-control input-sm" value="@TempData["filter"]" />
     </div>
-    <button type="submit" class="btn btn-primary btn-sm">GO</button>
-    @Html.ActionLink("Reset", "Browse", "Home", null, new { role = "button", @class = "btn btn-default btn-sm" })
+    <button type="submit" class="btn btn-primary btn-sm">@ViewRes.Browse.GoButton</button>
+    @Html.ActionLink(ViewRes.Browse.Reset, "Browse", "Home", null, new { role = "button", @class = "btn btn-default btn-sm" })
 }
 
 <table class="table table-striped">
     <caption>@Model.TableCaption</caption>
     <tr>
-        <th>Custom Url</th>
-        <th>Origin Url</th>
-        <th>Created On</th>
-        <th>Last Touched</th>
-        <th>Expire Mode</th>
-        <th>Expires On</th>
-        <th>Hits</th>
+        <th>@ModelRes.UrlItemModel.CustomUrl</th>
+        <th>@ModelRes.UrlItemModel.OriginUrl</th>
+        <th>@ModelRes.UrlItemViewModel.CreatedOn</th>
+        <th>@ModelRes.UrlItemViewModel.TouchedOn</th>
+        <th>@ModelRes.UrlItemModel.ExpireMode</th>
+        <th>@ModelRes.UrlItemViewModel.ExpiryDate</th>
+        <th>@ModelRes.UrlItemViewModel.HitCount</th>
         @*<th></th>*@
     </tr>
 

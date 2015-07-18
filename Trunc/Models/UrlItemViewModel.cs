@@ -1,14 +1,17 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Trunc.Data;
 
 namespace Trunc.Models {
     public class UrlItemViewModel : UrlItemModel {
         public long Id { get; set; }
 
+        [Display(Name = "CreatedOn", ResourceType = typeof(ModelRes.UrlItemViewModel))]
         public DateTime CreatedOn { get; set; }
 
         public string CreatedOnFormatted { get { return CreatedOn.ToString("G"); } }
 
+        [Display(Name = "TouchedOn", ResourceType = typeof(ModelRes.UrlItemViewModel))]
         public DateTime? TouchedOn { get; set; }
 
         public string TouchedOnFormatted {
@@ -35,6 +38,7 @@ namespace Trunc.Models {
             }
         }
 
+        [Display(Name = "ExpiryDate", ResourceType = typeof(ModelRes.UrlItemViewModel))]
         public string ExpiryDate {
             get {
                 switch (ExpireMode) {
@@ -48,6 +52,7 @@ namespace Trunc.Models {
             }
         }
 
+        [Display(Name = "HitCount", ResourceType = typeof(ModelRes.UrlItemViewModel))]
         public int HitCount { get; set; }
         public int UrlItemId { get; set; }
     }

@@ -123,7 +123,4 @@
   <data name="CustomUrlPlaceHolder" xml:space="preserve">
     <value>Manténgalo vaciar para generar automáticamente</value>
   </data>
-  <data name="Title" xml:space="preserve">
-    <value>Hogar</value>
-  </data>
 </root>
