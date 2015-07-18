@@ -1,5 +1,4 @@
-﻿@using Trunc.Extensions
-@model Trunc.Models.BrowseViewModel
+﻿@model Trunc.Models.BrowseViewModel
 
 @{
     ViewBag.Title = @ViewRes.SharedStrings.Browse;
@@ -45,7 +44,7 @@
                 @item.TouchedOnFormatted
             </td>
             <td>
-                @item.ExpireMode.GetDisplayValue()
+                @ModelRes.ExpireMode.ResourceManager.GetString(item.ExpireMode.ToString())
             </td>
             <td>
                 @item.ExpiryDate

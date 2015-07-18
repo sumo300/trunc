@@ -171,7 +171,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\AttributeExtensions.cs" />
     <Compile Include="Resources\Models\ExpireMode.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
