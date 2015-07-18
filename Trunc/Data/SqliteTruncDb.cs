@@ -8,6 +8,7 @@ namespace Trunc.Data {
 
         public IDbCore Database { get { return _db; } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SqliteTruncDb(string dbDirectory, bool forceDropCreateTables = false) {
             const string databaseName = "data.db";
 
