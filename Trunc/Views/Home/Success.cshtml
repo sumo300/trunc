@@ -1,10 +1,10 @@
 ﻿@model Trunc.Models.UrlItemViewModel
 
 @{
-    ViewBag.Title = "Success";
+    ViewBag.Title = @ViewRes.Success.Title;
 }
 
 <h2>@ViewBag.Title</h2>
 <h3>
-    The URL is <a href="@Model.FullShortUrl">@Model.FullShortUrl</a>
+    @ViewRes.Success.SuccessMessage <a href="@Model.FullShortUrl">@Model.FullShortUrl</a>
 </h3>
