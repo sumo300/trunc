@@ -27,13 +27,13 @@ By default, ELMAH logs locally to the `~/App_Data/ELMAH` folder as XML files.  B
 ## Roadmap ##
 
 * Database migrations (if there is any need to change the data model)
-* Upgrade to .NET Core 5 to support cross-platform deployments
+* Upgrade to .NET Core to support cross-platform deployments
 
 ## OSS Shout-Outs ##
 * [AutoMapper](https://github.com/AutoMapper/AutoMapper)
 * [Biggy](https://github.com/xivsolutions/biggy)
 * [Bootstrap](http://getbootstrap.com/)
-* [ELMAH](https://code.google.com/p/elmah/)
+* [ELMAH](https://github.com/elmah/Elmah)
 * [Ninject](https://github.com/ninject/ninject)
 * [NUnit](http://www.nunit.org/)
 * [SQLite](http://www.sqlite.org/)
@@ -41,7 +41,7 @@ By default, ELMAH logs locally to the `~/App_Data/ELMAH` folder as XML files.  B
 
 ## Want to help? ##
 
-* If you've found a bug, please log it in the [Issues](https://bitbucket.org/Sumo/trunc/issues?status=new&status=open) list.
+* If you've found a bug, please log it in the [Issues](https://github.com/sumo300/trunc/issues) list.
 * If you want to fork and fix, please fork then open a branch on your fork specifically for this issue.  Give it a sensible name.
 * Make the fix and then in your final commit message, use BitBucket's magic syntax (Closes/Fixes #X) so we can tie your pull request to you and your issue.
 * Please verify your bug/issue with a test.  We use NUnit and it's simple to get going.
