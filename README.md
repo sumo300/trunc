@@ -10,11 +10,11 @@ Trunc is a URL shortening application written using C# and MVC 5, targeting .NET
 * Browse and Search - Can't remember a shortened URL or lost it?  Browse or Search for it!
 * Hit Counts - Keeps track of every hit to a shortened URL
 
-## Demo ##
+~~## Demo ##~~
 
-A demo is hosted on Azure Web Sites.  Commits pushed here are automatically built and deployed to the demo site.  It typically only takes a few seconds for the new changes to appear.
+~~A demo is hosted on Azure Web Sites.  Commits pushed here are automatically built and deployed to the demo site.  It typically only takes a few seconds for the new changes to appear.~~
 
-http://trunc.azurewebsites.net/
+~~http://trunc.azurewebsites.net/~~
 
 ## Setup ##
 
